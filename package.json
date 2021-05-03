@@ -1,5 +1,5 @@
 {
-	"name": "club-me-admin",
+	"name": "packuba-admin",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
@@ -42,5 +42,10 @@
 	"devDependencies": {
 		"eslint": "^6.8.0",
 		"eslint-plugin-react": "^7.19.0"
-	}
+	},
+	"buildpacks": [
+		{
+			"url": "mars/create-react-app"
+		}
+	]
 }
