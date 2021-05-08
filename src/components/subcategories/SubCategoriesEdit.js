@@ -62,14 +62,21 @@ const SubCategoriesEdit = (props) => {
 					]}
 				/>
 				<BooleanInput label="Estado" formClassName={classes.t_name} source="status" />
-
+				<NumberInput
+					formClassName={classes.price}
+					label="Peso en gramos"
+					source="weight"
+					min={1}
+					step={1}
+				/>
 				<ImageInput
 					formClassName={classes.address}
-					source="image"
+					source="images"
 					resource="subcategories"
 					accept="image/*"
 					placeholder={<p>Drop your file here</p>}
 					fullWidth
+					multiple="true"
 				>
 					<ImageField source="url" />
 				</ImageInput>

@@ -59,6 +59,9 @@ const subcategory = async (resource, data, previousData) => {
 	if (data.price !== previousData.price) {
 		object.price = data.price;
 	}
+	if (data.weight !== previousData.weight) {
+		object.weight = data.weight;
+	}
 	if (data.currency !== previousData.currency) {
 		object.currency = data.currency;
 	}
@@ -68,9 +71,31 @@ const subcategory = async (resource, data, previousData) => {
 	if (data.category.id !== previousData.category.id) {
 		object.category = data.category.id;
 	}
-	if (!data.image.id) {
-		const url = await UploadImage(resource, [data.image]);
-		object.image = {url: url[0]};
+	if (data.images && data.images.length > 0) {
+		let urls = [];
+
+		const addImages = data.images.filter((image) => !image.id);
+		if (addImages.length > 0) {
+			urls = await UploadImage(resource, addImages);
+		}
+
+		if (urls.length > 0) {
+			object.images = urls.map((url) => ({
+				url,
+			}));
+		}
+
+		const deleteImages = previousData.images
+			.filter(
+				(x) =>
+					!data.images
+						.filter((image) => image.id)
+						.map((x) => x.id)
+						.includes(x.id),
+			)
+			.map((image) => image.id);
+
+		if (deleteImages.length > 0) object.deleteImages = deleteImages;
 	}
 	return object;
 };

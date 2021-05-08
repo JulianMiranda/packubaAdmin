@@ -19,9 +19,18 @@ const subcategories = async (resource, params) => {
 
 	object.name = params.data.name;
 	object.category = params.data.category;
+	object.price = params.data.price;
+	object.weight = params.data.weight;
+	let urls = [];
 
-	const url = await UploadImage(resource, [params.data.image]);
-	object.image = {url: url[0]};
+	urls = await UploadImage(resource, params.data.images);
+
+	object.images = urls.map((url) => ({
+		url,
+	}));
+
+	/* const url = await UploadImage(resource, [params.data.image]);
+	object.image = {url: url[0]}; */
 
 	return object;
 };

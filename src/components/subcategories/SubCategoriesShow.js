@@ -46,7 +46,7 @@ const SubCategoriesShow = (props) => {
 
 							<Grid item xs={12}>
 								<Typography variant="h6" gutterBottom align="center">
-									Status: <CustomBoolean record={record} label="Estado" source="status" />
+									Activo: <CustomBoolean record={record} label="Estado" source="status" />
 								</Typography>
 							</Grid>
 						</Grid>
@@ -60,7 +60,10 @@ const SubCategoriesShow = (props) => {
 								<Typography variant="h4" gutterBottom align="center">
 									{record.name}
 								</Typography>
-								<ImageField record={record} align="center" source="image.url" />
+								{record.images.map((image) => (
+									<img src={image.url} alt="" style={{margin: 10}} />
+								))}
+								<ImageField record={record} align="center" source="images" />
 							</Grid>
 							<Grid item xs={6}>
 								<Grid container spacing={2}>
@@ -81,14 +84,22 @@ const SubCategoriesShow = (props) => {
 										</Typography>
 									</Grid>
 								</Grid>
-								<Grid item xs={12}>
-									<div className={classes.Space}>&nbsp;</div>
-									<Typography variant="h5" gutterBottom align="center">
-										Status
-									</Typography>
-									<Typography variant="h6" gutterBottom align="center">
-										<CustomBoolean record={record} label="Estado" source="status" />
-									</Typography>
+								<Grid container spacing={2}>
+									<Grid item xs={6}>
+										<div className={classes.Space}>&nbsp;</div>
+										<Typography variant="h5" gutterBottom align="center">
+											Activo
+										</Typography>
+										<Typography variant="h6" gutterBottom align="center">
+											<CustomBoolean record={record} label="Estado" source="status" />
+										</Typography>
+									</Grid>
+									<Grid item xs={6}>
+										<div className={classes.Space}>&nbsp;</div>
+										<Typography variant="h5" gutterBottom align="center">
+											Peso: <i>{record.weight ? record.weight : ''} g</i>
+										</Typography>
+									</Grid>
 								</Grid>
 								<Grid container spacing={2}>
 									<Grid item xs={6}>
